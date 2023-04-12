@@ -5,6 +5,7 @@ import FormStep1 from './Step1';
 import FormStep2 from './Step2';
 import FormStep3 from './Step3';
 import FormStep4 from './Step4';
+import FormStep5 from './Step5';
 
 const { Step } = Steps;
 
@@ -67,7 +68,7 @@ const MultiStepForm = () => {
           <FormStep4 formData={formData} setFormData={setFormData} formRef={formRef} />
         )}
         {currentStep === 4 && (
-          <FormStep3 formData={formData} setFormData={setFormData} formRef={formRef} />
+          <FormStep5 formData={formData} setFormData={setFormData} formRef={formRef} />
         )}
         <div style={{
           display: 'flex',
