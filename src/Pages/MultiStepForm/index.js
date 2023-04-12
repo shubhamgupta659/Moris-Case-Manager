@@ -41,6 +41,7 @@ const MultiStepForm = () => {
   const handleFormSubmit = () => {
     formRef.current.validateFields().then((values) => {
       setFormData({ ...formData, [`step${currentStep + 1}Data`]: values });
+      console.log('Form Data : '+formData);
     });
 
   };
