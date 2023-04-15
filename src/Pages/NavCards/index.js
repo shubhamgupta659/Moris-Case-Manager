@@ -49,7 +49,7 @@ function NavCards(props) {
                     <Card bordered={true} className="criclebox">
                         <div className="number" >
                             <Row align="middle" gutter={[10, 0]}>
-                                <Col xs={3}>
+                                <Col className='card-content-container' xs={3}>
                                     <div className="icon-box">{c.label}</div>
                                 </Col>
                             </Row>

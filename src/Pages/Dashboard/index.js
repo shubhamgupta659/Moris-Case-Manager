@@ -108,7 +108,6 @@ function Dashboard() {
         setSubmittedApplicationDataSource(data);
         setTotalPages(0);
         setLoading(false);
-
     };
 
     return (

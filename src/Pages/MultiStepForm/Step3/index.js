@@ -23,11 +23,11 @@ const props = {
 const FormStep3 = ({ formData, setFormData, formRef }) => {
   const { step3Data } = formData;
   const options = [
-    { label: 'Non Master Feeder', value: 'nmf' },
-    { label: 'Managed Account', value: 'ma' },
-    { label: 'Master Feeder', value: 'mf' },
-    { label: 'Master-Special Purpose Vehicle (SPV)', value: 'mspv' },
-    { label: 'Master-Feeder -SPV', value: 'mfspv' },
+    { label: <div>Non Master Feeder<div className="small-label">[Please fill up Section II (a) and III, IV, V]</div></div>, value: 'nmf' },
+    { label: <div>Managed Account<div className="small-label">[Please fill up Section II (a) and III, IV, V]</div></div>, value: 'ma' },
+    { label: <div>Master Feeder<div className="small-label">[Please fill up Section II (a),(b) and III, IV, V]</div></div>, value: 'mf' },
+    { label: <div>Master-Special Purpose Vehicle (SPV)<div className="small-label">[Please fill up Section II (a),(c) and III, IV, V]</div></div>, value: 'mspv' },
+    { label: <div>Master-Feeder -SPV<div className="small-label">[Please fill up Section II (a),(b),(c) and III, IV, V]</div></div>, value: 'mfspv' },
   ];
 
 

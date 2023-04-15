@@ -6,7 +6,7 @@ const FormStep5 = ({ formData, setFormData, formRef }) => {
 
     useEffect(() => {
         // Load data from local storage on component mount
-        const storedData = JSON.parse(localStorage.getItem('formStep2Data'));
+        const storedData = JSON.parse(localStorage.getItem('formStep5Data'));
         if (storedData) {
             formRef.current.setFieldsValue(storedData);
         }
