@@ -10,8 +10,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #020e50;
-  color: #c29c63;
+  background-color: #3a3c41;
+  color: #ffffff;
   box-shadow: 1px 2px 2px #00000033;
 }
 
@@ -23,8 +23,8 @@
 }
 
 .appMenu {
-  background-color: #020e50;
-  color: #c29c63;
+  background-color: #3a3c41;
+  color: #ffffff;
   border: none;
   width: 15vw;
 }
@@ -97,8 +97,8 @@
 .appFooter {
   position: sticky;
   width: 100%;
-  background-color: #020e50;
-  color: #c29c63;
+  background-color: #3a3c41;
+  color: #ffffff;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -146,10 +146,10 @@ footer__links {
 }
 
 .footer__link {
-  fill: #d9b173;
+  fill: #ffffff;
   align-items: center;
   border-bottom: 1px solid transparent;
-  color: #d9b173;
+  color: #ffffff;
   display: inline-flex;
   font-size: 14px;
   font-weight: 600;
@@ -185,15 +185,13 @@ footer__links {
 
 .criclebox {
   font-weight: 700;
-  color: #c29c63;
-  background-color: #020e50;
+  color: #ffffff;
+  background-color: #3a3c41;
   height: 100%;
 }
 
 .criclebox:hover {
   font-weight: 700;
-  color: #020e50;
-  background-color: #c29c63;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
 }
 
@@ -288,12 +286,13 @@ footer__links {
   justify-content: center !important;
   align-self: center !important;
   align-items: center !important;
-  min-height: 50px !important;
   flex: 1 !important;
+  min-height: 50px !important;
   text-align: center !important;
-  min-width: 100px !important;
+  min-width: 75px !important;
   margin: 5px !important;
   padding: 0px !important;
+  font-size: 10px !important;
 }
 
 .box-line {
@@ -309,10 +308,8 @@ footer__links {
   justify-content: center !important;
   align-self: center !important;
   align-items: center !important;
-  min-height: 50px !important;
   flex: 1 !important;
   text-align: center !important;
-  min-width: 100px !important;
   margin: 5px !important;
   padding: 0px !important;
 }
@@ -324,10 +321,10 @@ footer__links {
 .view-form-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 20px;
   background: #fafafa;
   border-radius: 8px;
+  min-height: 32vw;
 }
 
 .view-form-header {
@@ -335,7 +332,7 @@ footer__links {
 }
 
 .view-form-content {
-  min-height: 20vw;
+
   margin: 0px 30px 5px 30px;
 }
 
@@ -352,4 +349,28 @@ footer__links {
 
 .form-label {
   font-weight: 600;
+}
+
+.view-select-action-container {
+  padding: 12px;
+}
+
+.case-label {
+  font-weight: 700;
+}
+
+.striped {
+  width: 100%;
+}
+
+.comment-column-style {
+  width: 33%;
+}
+
+.comment-body-style{
+  text-align: center;
+}
+
+.login-container{
+  margin:100px;
 }

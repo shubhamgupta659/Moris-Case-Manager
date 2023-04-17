@@ -1,4 +1,4 @@
-import url from './mas.svg';
+import url from './gra-logo.svg';
 import {
   Menu,
 } from "antd";
@@ -28,7 +28,7 @@ function AppHeader() {
           },
         ]}
       />
-      <h4>TIPS</h4>
+      <h4>Case Manager</h4>
       <UserName param={param} location={location} />
     </div>
   );

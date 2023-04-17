@@ -7,7 +7,7 @@ const AppStatusPane = () => {
     const navigate = useNavigate();
     const [postResult, setPostResult] = useState([]);
 
-    const fetchStatusCount = () => {
+    async function fetchStatusCount(){
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
@@ -16,7 +16,7 @@ const AppStatusPane = () => {
                 {
                     "$group": {
                         "_id": {
-                            "appStatus": "$appStatus"
+                            "caseStatus": "$caseStatus"
                         },
                         "count": { "$sum": 1 },
                     }
@@ -36,7 +36,7 @@ const AppStatusPane = () => {
             data: msg
         };
 
-        axios.request(config)
+        await axios.request(config)
             .then((response) => {
                 console.log(response.data.documents);
                 setPostResult(response.data.documents);
@@ -52,7 +52,7 @@ const AppStatusPane = () => {
     }, []);
 
     const onCardClick = (item) => {
-        navigate(`/oic/${item._id.appStatus}`);
+        navigate(`/oic/${item._id.caseStatus}`);
     };
 
     return (
@@ -61,7 +61,7 @@ const AppStatusPane = () => {
                 {postResult.map((c, index) => (
                     <Col
                         key={index}
-                        xs={3}
+                        xs={2}
                         className="mb-24"
                         onClick={() => onCardClick(c)}
                     >
@@ -69,7 +69,7 @@ const AppStatusPane = () => {
                             <div className="number" >
                                 <Row align="middle" gutter={[10, 0]}>
                                     <Col className='card-content-container' xs={3}>
-                                        <div className="icon-box">{c._id.appStatus}</div>
+                                        <div className="icon-box">{c._id.caseStatus}</div>
                                         <div className='box-line'><hr></hr></div>
                                         <div>{c.count}</div>
                                     </Col>
