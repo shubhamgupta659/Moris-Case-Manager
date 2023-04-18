@@ -164,7 +164,7 @@ function ViewAppAction() {
 
 const ActionCont = (props) => {
     if ((props.stage === 'stage1' && (props.casedata.caseStatus === 'S2 Clarification' || props.casedata.caseStatus === 'S3 Clarification')) ||
-        (props.stage === 'stage2' && (props.casedata.caseStatus === 'Submitted' || props.casedata.caseStatus === 'S2 Clarified' || props.casedata.caseStatus === 'S2 Verified'))
+        (props.stage === 'stage2' && (props.casedata.caseStatus === 'S1 Submitted' || props.casedata.caseStatus === 'S2 Clarified' || props.casedata.caseStatus === 'S2 Verified'))
         || (props.stage === 'stage3' && (props.casedata.caseStatus === 'S2 Approved' || props.casedata.caseStatus === 'S3 Clarified' || props.casedata.caseStatus === 'S3 Verified'))) {
         return (
             <div className='view-select-action-container'>

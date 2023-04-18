@@ -21,7 +21,7 @@ const Stage3Dash = () => {
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
             "collection": "applications",
-            "filter": { "caseStatus": { "$in": ["S2 Approved", "S3 Clarified", "S3 Clarification", "S3 Verified", "S3 Approved"] } },
+            "filter": { "caseStatus": { "$in": ["S2 Approved", "S2 Rejected", "S3 Clarified", "S3 Clarification", "S3 Verified", "S3 Approved"] } },
         });
 
         let config = {
@@ -139,6 +139,7 @@ const Stage3Dash = () => {
                                                                 : theme.palette.warning.dark,
                                     borderRadius: '0.25rem',
                                     color: '#fff',
+                                    display: 'inline-block',
                                     minWidth: '12ch',
                                     textAlign: 'center',
                                     p: '0.5rem',

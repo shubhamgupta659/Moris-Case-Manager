@@ -122,6 +122,7 @@ function Stage1Dash() {
             size: 100,
             Cell: ({ cell }) => (
               <Box
+                className='box-style'
                 component="span"
                 sx={(theme) => ({
                   backgroundColor:
@@ -139,6 +140,7 @@ function Stage1Dash() {
                                 ? theme.palette.secondary.light
                                 : theme.palette.warning.dark,
                   borderRadius: '0.25rem',
+                  display: 'inline-block',
                   color: '#fff',
                   minWidth: '12ch !important',
                   textAlign: 'center !important',

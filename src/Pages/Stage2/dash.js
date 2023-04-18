@@ -141,6 +141,7 @@ const Stage2Dash = () => {
                                                                 : theme.palette.warning.dark,
                                     borderRadius: '0.25rem',
                                     color: '#fff',
+                                    display: 'inline-block',
                                     minWidth: '12ch',
                                     textAlign: 'center',
                                     p: '0.5rem',
