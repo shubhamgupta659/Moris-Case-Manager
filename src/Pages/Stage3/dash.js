@@ -58,12 +58,12 @@ const Stage3Dash = () => {
                         accessorKey: 'caseId',
                         id: 'caseId', //id is still required when using accessorFn instead of accessorKey
                         header: 'Case Id',
-                        size: 100,
+                        size: 50,
                     },
                     {
                         accessorKey: 'fiName', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                        header: 'FI Name',
-                        size: 200,
+                        header: 'Name',
+                        size: 150,
                     },
                     {
                         accessorKey: 'uid', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
@@ -181,7 +181,7 @@ const Stage3Dash = () => {
                     enablePinning
                     enableRowSelection={false}
                     enableSelectAll={false}
-                    initialState={{ showColumnFilters: true, density: 'compact', columnVisibility: { Select: false, caseId: false, gender: false, idType: false, countryOfOrigin: false, address: false, dob: false, role: false } }}
+                    initialState={{ showColumnFilters: true, density: 'compact', columnVisibility: { Select: false, gender: false, idType: false, countryOfOrigin: false, address: false, dob: false, role: false } }}
                     positionToolbarAlertBanner='bottom'
                     renderRowActions={({ row, table }) => (
                         <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>

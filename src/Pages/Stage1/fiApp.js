@@ -190,7 +190,7 @@ const Stage1App = () => {
                 <Form ref={formRef}>
                     <Form.Item
                         key={1} // Add a unique key for each Form.Item component
-                        label="FI Name"
+                        label="Name"
                         name={`fiName`} // Use a unique name for each Form.Item component
                         initialValue={formData.fiName}
                         rules={[
