@@ -82,7 +82,7 @@ const Stage1App = () => {
                 caseType: values.caseType,
                 role: values.role,
                 assignee: '',
-                caseStatus: 'Draft',
+                caseStatus: 'S1 Draft',
                 comment: ''
             });
         });
@@ -103,7 +103,7 @@ const Stage1App = () => {
                 caseType: values.caseType,
                 role: values.role,
                 assignee: '',
-                caseStatus: 'Submitted',
+                caseStatus: 'S1 Submitted',
                 comment: ''
             })
         });

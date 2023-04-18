@@ -67,9 +67,9 @@ function AppStatusPane({ parentData }) {
                     >
                         <Card bordered={true} className="criclebox" style={{
                             backgroundColor:
-                                c._id.caseStatus === 'Draft'
+                                c._id.caseStatus === 'S1 Draft'
                                     ? '#ff9800'
-                                    : c._id.caseStatus === 'Submitted'
+                                    : c._id.caseStatus === 'S1 Submitted'
                                         ? '#42a5f5'
                                         : c._id.caseStatus.includes('Rejected')
                                             ? '#c62828'

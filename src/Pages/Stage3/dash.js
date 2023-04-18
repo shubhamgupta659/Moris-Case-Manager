@@ -124,9 +124,9 @@ const Stage3Dash = () => {
                                 component="span"
                                 sx={(theme) => ({
                                     backgroundColor:
-                                        cell.getValue() === 'Draft'
+                                        cell.getValue() === 'S1 Draft'
                                             ? theme.palette.warning.light
-                                            : cell.getValue() === 'Submitted'
+                                            : cell.getValue() === 'S1 Submitted'
                                                 ? theme.palette.primary.light
                                                 : cell.getValue().includes('Rejected')
                                                     ? theme.palette.error.dark

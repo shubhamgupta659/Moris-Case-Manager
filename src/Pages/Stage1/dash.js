@@ -125,9 +125,9 @@ function Stage1Dash() {
                 component="span"
                 sx={(theme) => ({
                   backgroundColor:
-                    cell.getValue() === 'Draft'
+                    cell.getValue() === 'S1 Draft'
                       ? theme.palette.warning.light
-                      : cell.getValue() === 'Submitted'
+                      : cell.getValue() === 'S1 Submitted'
                         ? theme.palette.primary.light
                         : cell.getValue().includes('Rejected')
                           ? theme.palette.error.dark
@@ -213,7 +213,7 @@ const ActionButton = (props) => {
     navigate(`/view/stage1/${props.row.caseId}`, { state: props.row });
   };
 
-  if (props.row.caseStatus === 'Draft' || props.row.caseStatus === 'Submitted') {
+  if (props.row.caseStatus === 'S1 Draft' || props.row.caseStatus === 'S1 Submitted') {
     return (<Tooltip arrow placement='left' title='Edit Case'>
       <IconButton onClick={() => onEditClick(props.row)}>
         <Edit />
