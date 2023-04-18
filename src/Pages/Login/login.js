@@ -6,11 +6,11 @@ const Login = () => {
     const navigate = useNavigate();
     const onFinish = (values) => {
         if(values.username==='stage1user' && values.password ==='password'){
-            navigate(`/stage1`);
+            navigate(`/stage1`, { user: values.username });
         }else if(values.username==='stage2user' && values.password ==='password'){
-            navigate(`/stage2`);
+            navigate(`/stage2`, { user: values.username });
         }else if(values.username==='stage3user' && values.password ==='password'){
-            navigate(`/stage3`);
+            navigate(`/stage3`, { user: values.username });
         }else{
 
         }

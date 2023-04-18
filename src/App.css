@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3a3c41;
+  background-color: #6b6c6e;
   color: #ffffff;
   box-shadow: 1px 2px 2px #00000033;
 }
@@ -18,15 +18,15 @@
 .logo {
   display: flex;
   width: 10vw;
-  height: auto;
+  height: 8vh;
   padding: 8px;
 }
 
-.appMenu {
-  background-color: #3a3c41;
+.applogo {
+  background-color: #6b6c6e;
   color: #ffffff;
   border: none;
-  width: 15vw;
+  width: 0px;
 }
 
 .user-profiles {
@@ -97,7 +97,7 @@
 .appFooter {
   position: sticky;
   width: 100%;
-  background-color: #3a3c41;
+  background-color: #6b6c6e;
   color: #ffffff;
   display: flex;
   justify-content: space-evenly;
@@ -185,8 +185,6 @@ footer__links {
 
 .criclebox {
   font-weight: 700;
-  color: #ffffff;
-  background-color: #3a3c41;
   height: 100%;
 }
 
@@ -328,6 +326,8 @@ footer__links {
 }
 
 .view-form-header {
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
@@ -352,6 +352,7 @@ footer__links {
 }
 
 .view-select-action-container {
+  margin-top:10px;
   padding: 12px;
 }
 
@@ -367,10 +368,32 @@ footer__links {
   width: 33%;
 }
 
-.comment-body-style{
+.comment-body-style {
   text-align: center;
 }
 
-.login-container{
-  margin:100px;
+.login-container {
+  display: flex;
+    width: 50%;
+    justify-content: center;
+    padding: 100px 50px 50px 50px;
+    background: #fafafa;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.back-button-container {
+  display: flex;
+  position: relative;
+  top: 4%;
+  right: -10%;
+  flex-direction: row-reverse;
+}
+
+.view-back-button-container{
+  display: flex;
+    position: relative;
+    margin: 10px;
+    right: -27%;
+    width: 0px;
 }

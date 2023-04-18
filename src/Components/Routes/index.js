@@ -12,7 +12,7 @@ import Login from "../../Pages/Login/login";
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route path="/" element={<Login />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/dashboard" element={<Dashboard />}></Route>
       <Route path="/applyNewIncentive" element={<ApplyTaxIncentiveDash />}></Route>

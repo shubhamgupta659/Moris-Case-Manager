@@ -1,16 +1,17 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
-import { Form, Checkbox, Input, Select, DatePicker, Button } from 'antd';
+import { Form, Checkbox, Input, Select, DatePicker, Button, Tooltip } from 'antd';
 import axios from 'axios';
 import moment from "moment";
+import { RollbackOutlined } from '@ant-design/icons';
 const { TextArea } = Input;
-
 
 const Stage1App = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const params = useParams();
     const formRef = useRef();
+    const [size, setSize] = useState('small'); 
     const [formData, setFormData] = useState({
         caseId: state ? state.caseId : params.id,
         fiName: state ? state.fiName : null,
@@ -177,8 +178,13 @@ const Stage1App = () => {
             }
     }, [formData]);
 
+    const backButtonHandler = () => {
+        navigate(`/stage1`);
+    };
+
     return (
         <div className="app-main-container">
+            <div className="back-button-container"><Tooltip title="Back"><Button shape="round" onClick={backButtonHandler} icon={<RollbackOutlined />} size={size} /></Tooltip></div>
             <div className="app-header-container"><h4>{params.action === 'add' ? 'ADD Case' : 'EDIT Case'}</h4></div>
             <div className="form-container">
                 <Form ref={formRef}>

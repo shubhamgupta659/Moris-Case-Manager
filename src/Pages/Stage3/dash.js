@@ -15,13 +15,13 @@ import AppStatusPane from '../AppStatusPane';
 
 const Stage3Dash = () => {
     const navigate = useNavigate();
-    const [postResult, setPostResult] = useState([]);
-    async function fetchDashData(){
+    const [postResult, setPostResult] = useState(null);
+    async function fetchDashData() {
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
             "collection": "applications",
-            "filter": { "caseStatus": { "$in": ["S2 Approved","S3 Clarified","S3 Clarification","S3 Verified","S3 Approved"] } },
+            "filter": { "caseStatus": { "$in": ["S2 Approved", "S3 Clarified", "S3 Clarification", "S3 Verified", "S3 Approved"] } },
         });
 
         let config = {
@@ -161,7 +161,7 @@ const Stage3Dash = () => {
 
     return (
         <div>
-            <div><AppStatusPane /></div>
+            <div><AppStatusPane parentData={postResult} /></div>
             <div className='mui-table'>
                 <MaterialReactTable
                     displayColumnDefOptions={{
@@ -174,7 +174,7 @@ const Stage3Dash = () => {
                     }}
                     enableRowActions
                     columns={columns}
-                    data={postResult}
+                    data={postResult === null ? [] : postResult}
                     enableColumnFilterModes
                     enableColumnOrdering
                     enableGrouping
@@ -186,8 +186,8 @@ const Stage3Dash = () => {
                     renderRowActions={({ row, table }) => (
                         <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                             <Tooltip arrow placement='left' title='View'>
-                                <IconButton>
-                                    <RemoveRedEye onClick={() => onViewClick(row)} />
+                                <IconButton onClick={() => onViewClick(row)}>
+                                    <RemoveRedEye />
                                 </IconButton>
                             </Tooltip>
                         </Box>

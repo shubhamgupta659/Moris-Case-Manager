@@ -15,7 +15,7 @@ import AppStatusPane from '../AppStatusPane';
 
 const Stage2Dash = () => {
     const navigate = useNavigate();
-    const [postResult, setPostResult] = useState([]);
+    const [postResult, setPostResult] = useState(null);
     async function fetchDashData() {
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
@@ -87,13 +87,13 @@ const Stage2Dash = () => {
                     },
                     {
                         accessorKey: 'address', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-            
+
                         header: 'address',
                         size: 300,
                     },
                     {
                         accessorKey: 'gender', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-            
+
                         header: 'Gender',
                         size: 50,
                     },
@@ -163,7 +163,7 @@ const Stage2Dash = () => {
 
     return (
         <div>
-            <div><AppStatusPane /></div>
+            <div><AppStatusPane parentData={postResult} /></div>
             <div className='mui-table'>
                 <MaterialReactTable
                     displayColumnDefOptions={{
@@ -176,7 +176,7 @@ const Stage2Dash = () => {
                     }}
                     enableRowActions
                     columns={columns}
-                    data={postResult}
+                    data={postResult === null ? [] : postResult}
                     enableColumnFilterModes
                     enableColumnOrdering
                     enableGrouping
@@ -188,8 +188,8 @@ const Stage2Dash = () => {
                     renderRowActions={({ row, table }) => (
                         <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                             <Tooltip arrow placement='left' title='View'>
-                                <IconButton>
-                                    <RemoveRedEye onClick={() => onViewClick(row)} />
+                                <IconButton onClick={() => onViewClick(row)}>
+                                    <RemoveRedEye />
                                 </IconButton>
                             </Tooltip>
                         </Box>

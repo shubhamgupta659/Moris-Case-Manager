@@ -2,7 +2,7 @@ import url from './gra-logo.svg';
 import {
   Menu,
 } from "antd";
-import { useNavigate,useParams,useLocation  } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 
 function AppHeader() {
@@ -10,24 +10,14 @@ function AppHeader() {
   const param = useParams();
   const location = useLocation();
   const onMenuClick = (item) => {
-    navigate(`/${item.key}`);
+    navigate(`/`);
   };
   return (
     <div className="appHeader">
-      <Menu
-        className="appMenu"
-        onClick={onMenuClick}
-        mode="horizontal"
-        items={[
-          {
-            label: <img
-              className="logo"
-              alt=""
-              src={url} />,
-            key: "",
-          },
-        ]}
-      />
+      <div className="applogo" onClick={onMenuClick}><img
+        className="logo"
+        alt=""
+        src={url} /></div>
       <h4>Case Manager</h4>
       <UserName param={param} location={location} />
     </div>
@@ -35,7 +25,7 @@ function AppHeader() {
 }
 
 function UserName(props) {
-  if (props.location.pathname !=='/')
+  if (props.location.pathname !== '/')
     return <div className="user-profiles"><div><UserOutlined /></div>Shubham Gupta</div>;
   else
     return <div></div>;

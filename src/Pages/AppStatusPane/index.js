@@ -3,11 +3,10 @@ import axios from 'axios';
 import { Card, Col, Row } from 'antd';
 import { useNavigate } from "react-router-dom";
 
-const AppStatusPane = () => {
+function AppStatusPane({ parentData }) {
     const navigate = useNavigate();
     const [postResult, setPostResult] = useState([]);
-
-    async function fetchStatusCount(){
+    async function fetchStatusCount() {
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
@@ -21,8 +20,9 @@ const AppStatusPane = () => {
                         "count": { "$sum": 1 },
                     }
                 },
-                { "$sort": { "count": 1 } }
-            ]
+                { "$sort": { "_id.caseStatus": 1 } }
+            ],
+            
         });
 
         let config = {
@@ -32,24 +32,24 @@ const AppStatusPane = () => {
             headers: {
                 'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
 
         await axios.request(config)
             .then((response) => {
-                console.log(response.data.documents);
                 setPostResult(response.data.documents);
-
             })
             .catch((error) => {
                 console.log(error);
             });
     };
-
     useEffect(() => {
-        fetchStatusCount();
-    }, []);
+        if (parentData) {
+            fetchStatusCount();
+        }
+    }, parentData);
 
     const onCardClick = (item) => {
         navigate(`/oic/${item._id.caseStatus}`);
@@ -65,7 +65,24 @@ const AppStatusPane = () => {
                         className="mb-24"
                         onClick={() => onCardClick(c)}
                     >
-                        <Card bordered={true} className="criclebox">
+                        <Card bordered={true} className="criclebox" style={{
+                            backgroundColor:
+                                c._id.caseStatus === 'Draft'
+                                    ? '#ff9800'
+                                    : c._id.caseStatus === 'Submitted'
+                                        ? '#42a5f5'
+                                        : c._id.caseStatus.includes('Rejected')
+                                            ? '#c62828'
+                                            : c._id.caseStatus.includes('Approved')
+                                                ? '#4caf50'
+                                                : c._id.caseStatus.includes('Clarification')
+                                                    ? '#ef5350'
+                                                    : c._id.caseStatus.includes('Clarified')
+                                                        ? '#ba68c8'
+                                                        : '#e65100',
+                            color: '#fff',
+                            textAlign: 'center',
+                        }}>
                             <div className="number" >
                                 <Row align="middle" gutter={[10, 0]}>
                                     <Col className='card-content-container' xs={3}>
@@ -79,7 +96,7 @@ const AppStatusPane = () => {
                     </Col>
                 ))}
             </Row>
-        </div>);
+        </div >);
 
 }
 

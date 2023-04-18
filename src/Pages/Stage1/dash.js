@@ -14,9 +14,9 @@ import { Edit, RemoveRedEye } from '@mui/icons-material';
 import axios from 'axios';
 import AppStatusPane from '../AppStatusPane';
 
-const Stage1Dash = () => {
+function Stage1Dash() {
   const navigate = useNavigate();
-  const [postResult, setPostResult] = useState([]);
+  const [postResult, setPostResult] = useState(null);
   async function fetchDashData() {
     let msg = JSON.stringify({
       "dataSource": "Singapore-free-cluster",
@@ -31,6 +31,7 @@ const Stage1Dash = () => {
       headers: {
         'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       data: msg
     };
@@ -155,12 +156,12 @@ const Stage1Dash = () => {
   );
 
   const onNewCaseClick = () => {
-    navigate(`/app/add/${postResult.length + 1}`);
+    navigate(`/app/add/${postResult === null ? 1 : postResult.length + 1}`);
   };
 
   return (
     <div>
-      <div><AppStatusPane /></div>
+      <div><AppStatusPane parentData={postResult} /></div>
       <div className='mui-table'>
         <MaterialReactTable
           displayColumnDefOptions={{
@@ -173,7 +174,7 @@ const Stage1Dash = () => {
           }}
           enableRowActions
           columns={columns}
-          data={postResult}
+          data={postResult === null ? [] : postResult}
           enableColumnFilterModes
           enableColumnOrdering
           enableGrouping
@@ -214,16 +215,15 @@ const ActionButton = (props) => {
 
   if (props.row.caseStatus === 'Draft' || props.row.caseStatus === 'Submitted') {
     return (<Tooltip arrow placement='left' title='Edit Case'>
-      <IconButton>
-        <Edit
-          onClick={() => onEditClick(props.row)} />
+      <IconButton onClick={() => onEditClick(props.row)}>
+        <Edit />
       </IconButton>
     </Tooltip>
     );
   } else {
     return (<Tooltip arrow placement='left' title='View'>
-      <IconButton>
-        <RemoveRedEye onClick={() => onViewClick(props.row)} />
+      <IconButton onClick={() => onViewClick(props.row)}>
+        <RemoveRedEye />
       </IconButton>
     </Tooltip>);
   }

@@ -3,16 +3,18 @@ import AppStatusPane from "../AppStatusPane";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { Col, Row } from 'antd';
 import axios from 'axios';
-import { Select, Modal, Form, Input, Upload, Button } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Select, Modal, Form, Input, Upload, Button, Tooltip } from 'antd';
+import { UploadOutlined, RollbackOutlined } from '@ant-design/icons';
 import moment from 'moment';
 const { TextArea } = Input;
 
 
-const ViewAppAction = () => {
+function ViewAppAction() {
+    const [size, setSize] = useState('small');
+    const navigate = useNavigate();
     const { state } = useLocation();
     const params = useParams();
-    const [postResult, setPostResult] = useState([]);
+    const [postResult, setPostResult] = useState(null);
     async function fetchCommentsData() {
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
@@ -43,9 +45,13 @@ const ViewAppAction = () => {
     useEffect(() => {
         fetchCommentsData();
     }, []);
+
+    const backButtonHandler = () => {
+        navigate(`/${params.stage}`);
+    };
     return (
         <div className='view-main-container'>
-            <div className='view-status-pane'><AppStatusPane /></div>
+            <div className='view-status-pane'><AppStatusPane parentData={postResult} /></div>
             <div>
                 <Row>
                     <Col span={12}>
@@ -113,9 +119,14 @@ const ViewAppAction = () => {
                     </Col>
                     <Col span={12}>
                         <div className='view-form-container'>
-                            <div className='view-select-action-container'>
-                                <ActionCont stage={params.stage} casedata={state} noofcomments={postResult.length} />
+
+                            <div className='view-form-header'>
+                                <h2>Review Section</h2>
+                                <div className="view-back-button-container"><Tooltip title="Back"><Button shape="round" onClick={backButtonHandler} icon={<RollbackOutlined />} size={size} /></Tooltip></div>
                             </div>
+                            <div className='view-form-sep'><hr></hr></div>
+                            <ActionCont stage={params.stage} casedata={state} noofcomments={postResult === null ? 0 : postResult.length} />
+
                             <div className='view-form-comments-container'>
                                 <table className="striped">
                                     <thead>
@@ -126,7 +137,13 @@ const ViewAppAction = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='comment-body-style'>
-                                        {postResult.map((c, index) => (
+                                        {postResult === null ? [].map((c, index) => (
+                                            <tr>
+                                                <td>{c.assignedBy}</td>
+                                                <td>{c.commentDate}</td>
+                                                <td>{c.commentMsg}</td>
+                                            </tr>
+                                        )) : postResult.map((c, index) => (
                                             <tr>
                                                 <td>{c.assignedBy}</td>
                                                 <td>{c.commentDate}</td>
@@ -146,25 +163,28 @@ const ViewAppAction = () => {
 };
 
 const ActionCont = (props) => {
-    console.log(props);
     if ((props.stage === 'stage1' && (props.casedata.caseStatus === 'S2 Clarification' || props.casedata.caseStatus === 'S3 Clarification')) ||
         (props.stage === 'stage2' && (props.casedata.caseStatus === 'Submitted' || props.casedata.caseStatus === 'S2 Clarified' || props.casedata.caseStatus === 'S2 Verified'))
         || (props.stage === 'stage3' && (props.casedata.caseStatus === 'S2 Approved' || props.casedata.caseStatus === 'S3 Clarified' || props.casedata.caseStatus === 'S3 Verified'))) {
-        return (<Form>
-            <Form.Item
-                key={1} // Add a unique key for each Form.Item component
-                label="Action"
-                name={`action`} // Use a unique name for each Form.Item component
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please select the action',
-                    },
-                ]}
-            >
-                <SelectDrop stage={props.stage} casedata={props.casedata} noofcomments={props.noofcomments} />
-            </Form.Item>
-        </Form>);
+        return (
+            <div className='view-select-action-container'>
+                <Form>
+                    <Form.Item
+                        key={1} // Add a unique key for each Form.Item component
+                        label="Action"
+                        name={`action`} // Use a unique name for each Form.Item component
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please select the action',
+                            },
+                        ]}
+                    >
+                        <SelectDrop stage={props.stage} casedata={props.casedata} noofcomments={props.noofcomments} />
+                    </Form.Item>
+                </Form>
+            </div>
+        );
     }
 };
 
@@ -186,7 +206,7 @@ const SelectDrop = (props) => {
         attachment: null
     });
 
-    async function insertComments (data) {
+    async function insertComments(data) {
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
@@ -214,7 +234,7 @@ const SelectDrop = (props) => {
             });
     };
 
-    async function updateCase (data){
+    async function updateCase(data) {
         let msg = JSON.stringify({
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
