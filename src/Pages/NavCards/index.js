@@ -43,7 +43,7 @@ function NavCards(props) {
                 <Col
                     key={index}
                     xl={4}
-                    className="mb-24"
+                    className="mb-23"
                     onClick={()=>onNavClick(c)}
                 >
                     <Card bordered={true} className="criclebox">

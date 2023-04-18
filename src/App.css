@@ -5,6 +5,51 @@
   width: 100%;
 }
 
+
+
+
+a {
+  background-color: transparent;
+}
+
+.sg-crest {
+  width: 1.25rem;
+  height: 1.75rem;
+}
+
+.sgds-masthead a {
+  padding-left: 8px;
+  display: flex !important;
+  gap: 8px;
+  text-decoration: none;
+  display: inline-block;
+  color: #474747;
+  align-items: center;
+}
+
+.sgds-masthead {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  background-color: #f0f0f0;
+  height: auto;
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+.eyd-container {
+  max-width: 1280px;
+}
+
+.eyd-container,
+.eyd-container-lg {
+  margin: auto;
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+}
+
 .appHeader {
   height: 10%;
   display: flex;
@@ -298,7 +343,18 @@ footer__links {
 }
 
 .ant-card-body {
-  padding: 10px !important;
+  padding: 5px !important;
+}
+
+.mb-23 {
+  display: flex !important;
+  justify-content: center !important;
+  align-self: center !important;
+  align-items: center !important;
+  flex: 1 !important;
+  text-align: center !important;
+  margin: 5px !important;
+  padding: 0px !important;
 }
 
 .mb-24 {
@@ -308,7 +364,7 @@ footer__links {
   align-items: center !important;
   flex: 1 !important;
   text-align: center !important;
-  margin: 5px !important;
+  margin: 3px !important;
   padding: 0px !important;
 }
 
@@ -352,7 +408,7 @@ footer__links {
 }
 
 .view-select-action-container {
-  margin-top:10px;
+  margin-top: 10px;
   padding: 12px;
 }
 
@@ -374,12 +430,12 @@ footer__links {
 
 .login-container {
   display: flex;
-    width: 50%;
-    justify-content: center;
-    padding: 100px 50px 50px 50px;
-    background: #fafafa;
-    border-radius: 8px;
-    margin: 20px;
+  width: 50%;
+  justify-content: center;
+  padding: 100px 50px 50px 50px;
+  background: #fafafa;
+  border-radius: 8px;
+  margin: 20px;
 }
 
 .back-button-container {
@@ -390,10 +446,10 @@ footer__links {
   flex-direction: row-reverse;
 }
 
-.view-back-button-container{
+.view-back-button-container {
   display: flex;
-    position: relative;
-    margin: 10px;
-    right: -27%;
-    width: 0px;
+  position: relative;
+  margin: 10px;
+  right: -27%;
+  width: 0px;
 }
