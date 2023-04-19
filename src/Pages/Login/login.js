@@ -1,25 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../AuthContext';
 
 const Login = () => {
+    const { setUsername, setUserImageSrc } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setUsername('');
+        setUserImageSrc('');
+    },[]);
     const onFinish = (values) => {
-        if(values.username==='stage1user' && values.password ==='password'){
+        if (values.username === 'asouser' && values.password === 'password') {
+            setUsername(values.username);
+            setUserImageSrc('https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/106.jpg')
             navigate(`/stage1`, { user: values.username });
-        }else if(values.username==='stage2user' && values.password ==='password'){
+        } else if (values.username === 'ciouser' && values.password === 'password') {
+            setUsername(values.username);
+            setUserImageSrc('https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg')
             navigate(`/stage2`, { user: values.username });
-        }else if(values.username==='stage3user' && values.password ==='password'){
+        } else if (values.username === 'aouser' && values.password === 'password') {
+            setUsername(values.username);
+            setUserImageSrc('https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1091.jpg')
             navigate(`/stage3`, { user: values.username });
-        }else{
+        } else {
 
         }
     };
-    
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    
+
     return (
         <div className='login-container'>
             <Form

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Col, Row,Collapse } from 'antd';
+import { Card, Col, Row, Collapse } from 'antd';
 import { useNavigate } from "react-router-dom";
 const { Panel } = Collapse;
 
@@ -16,12 +16,13 @@ function AppStatusPane({ parentData }) {
                 {
                     "$group": {
                         "_id": {
-                            "caseStatus": "$caseStatus"
+                            "caseStatus": "$caseStatus",
+                            "caseStatusId": "$caseStatusId"
                         },
                         "count": { "$sum": 1 },
                     }
                 },
-                { "$sort": { "_id.caseStatus": 1 } }
+                { "$sort": { "_id.caseStatusId": 1 } }
             ],
 
         });
@@ -70,19 +71,19 @@ function AppStatusPane({ parentData }) {
                             >
                                 <Card bordered={true} className="criclebox" style={{
                                     backgroundColor:
-                                        c._id.caseStatus === 'S1 Draft'
+                                        c._id.caseStatus === 'Draft'
                                             ? '#ff9800'
-                                            : c._id.caseStatus === 'S1 Submitted'
+                                            : c._id.caseStatus === 'Open'
                                                 ? '#42a5f5'
-                                                : c._id.caseStatus.includes('Rejected')
-                                                    ? '#c62828'
-                                                    : c._id.caseStatus.includes('Approved')
+                                                : c._id.caseStatus.includes('Temp CFF')
+                                                    ? '#e65100'
+                                                    : c._id.caseStatus.includes('Escalated')
                                                         ? '#4caf50'
-                                                        : c._id.caseStatus.includes('Clarification')
+                                                        : c._id.caseStatus.includes('Re-Assign')
                                                             ? '#ef5350'
-                                                            : c._id.caseStatus.includes('Clarified')
+                                                            : c._id.caseStatus.includes('Archive')
                                                                 ? '#ba68c8'
-                                                                : '#e65100',
+                                                                : '#c62828',
                                     color: '#fff',
                                     textAlign: 'center',
                                 }}>

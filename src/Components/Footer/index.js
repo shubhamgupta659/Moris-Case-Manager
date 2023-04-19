@@ -5,7 +5,7 @@ function AppFooter() {
     <div className="appFooter">
       <div className="footer__content">
         <div className="footer__top-section">
-          <p className="footer__title">MAS-FI Transactions Platform</p>
+          <p className="footer__title"><h2>GAMBLING REGULATORY AUTHORITY</h2></p>
           <div className="footer__links">
             <p>Contact us at 
               <a href="mailto:helpdesk@mas.gov.sg" class="footer__link"><span>&nbsp;</span>helpdesk@mas.gov.sg</a>
@@ -21,6 +21,9 @@ function AppFooter() {
             <LinkOutlined />
             </a>
             <a className="footer__link" href="https://www.mas.gov.sg/terms-of-use" target="_blank" rel="noreferrer">Terms of Use
+            <LinkOutlined />
+            </a>
+            <a className="footer__link" href="https://www.mas.gov.sg/terms-of-use" target="_blank" rel="noreferrer">Reach
             <LinkOutlined />
             </a>
           </div>

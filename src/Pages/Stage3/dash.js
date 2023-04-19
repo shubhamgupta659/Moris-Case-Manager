@@ -21,7 +21,7 @@ const Stage3Dash = () => {
             "dataSource": "Singapore-free-cluster",
             "database": "appWorkflow",
             "collection": "applications",
-            "filter": { "caseStatus": { "$in": ["S2 Approved", "S2 Rejected", "S3 Clarified", "S3 Clarification", "S3 Verified", "S3 Approved"] } },
+            "filter": { "caseStatus": { "$in": ["Escalated", "Temp CFF", "CFF", "Re-Assign", "Archive"] } },
         });
 
         let config = {
@@ -61,7 +61,7 @@ const Stage3Dash = () => {
                         size: 50,
                     },
                     {
-                        accessorKey: 'fiName', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                        accessorKey: 'name', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
                         header: 'Name',
                         size: 150,
                     },
@@ -81,8 +81,8 @@ const Stage3Dash = () => {
                         size: 50,
                     },
                     {
-                        accessorKey: 'countryOfOrigin', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-                        header: 'Country of Origin',
+                        accessorKey: 'location', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                        header: 'Location',
                         size: 50,
                     },
                     {
@@ -111,6 +111,26 @@ const Stage3Dash = () => {
                         size: 100,
                     },
                     {
+                        accessorKey: 'description', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                        header: 'Case Description',
+                        size: 100,
+                    },
+                    {
+                        accessorKey: 'operatorName', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                        header: 'Operator Name',
+                        size: 100,
+                    },
+                    {
+                        accessorKey: 'caseClassification', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                        header: 'Case Classification',
+                        size: 100,
+                    },
+                    {
+                        accessorKey: 'doi', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+                        header: 'Date of Incidence',
+                        size: 100,
+                    },
+                    {
                         accessorKey: 'assignee', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
                         header: 'Asignee',
                         size: 100,
@@ -124,19 +144,19 @@ const Stage3Dash = () => {
                                 component="span"
                                 sx={(theme) => ({
                                     backgroundColor:
-                                        cell.getValue() === 'S1 Draft'
+                                        cell.getValue() === 'Draft'
                                             ? theme.palette.warning.light
-                                            : cell.getValue() === 'S1 Submitted'
+                                            : cell.getValue() === 'Open'
                                                 ? theme.palette.primary.light
-                                                : cell.getValue().includes('Rejected')
-                                                    ? theme.palette.error.dark
-                                                    : cell.getValue().includes('Approved')
+                                                : cell.getValue().includes('Temp CFF')
+                                                    ? theme.palette.warning.dark
+                                                    : cell.getValue().includes('Escalated')
                                                         ? theme.palette.success.light
-                                                        : cell.getValue().includes('Clarification')
+                                                        : cell.getValue().includes('Re-Assign')
                                                             ? theme.palette.error.light
-                                                            : cell.getValue().includes('Clarified')
+                                                            : cell.getValue().includes('Archive')
                                                                 ? theme.palette.secondary.light
-                                                                : theme.palette.warning.dark,
+                                                                : theme.palette.error.dark,
                                     borderRadius: '0.25rem',
                                     color: '#fff',
                                     display: 'inline-block',
@@ -182,7 +202,7 @@ const Stage3Dash = () => {
                     enablePinning
                     enableRowSelection={false}
                     enableSelectAll={false}
-                    initialState={{ showColumnFilters: true, density: 'compact', columnVisibility: { Select: false, gender: false, idType: false, countryOfOrigin: false, address: false, dob: false, role: false } }}
+                    initialState={{ showColumnFilters: true, density: 'compact', columnVisibility: { Select: false, gender: false, idType: false, location: false, address: false, dob: false, role: false, description: false, caseClassification: false, operatorName: false, doi: false } }}
                     positionToolbarAlertBanner='bottom'
                     renderRowActions={({ row, table }) => (
                         <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>

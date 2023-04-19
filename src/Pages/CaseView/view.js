@@ -110,7 +110,24 @@ function ViewAppAction() {
                                         </tr>
                                         <tr>
                                             <td className='case-label'>Case Status</td>
-                                            <td>{state.caseStatus}</td>
+                                            <td style={{
+                                                backgroundColor:
+                                                    state.caseStatus === 'Draft'
+                                                        ? '#ff9800'
+                                                        : state.caseStatus === 'Open'
+                                                            ? '#42a5f5'
+                                                            : state.caseStatus.includes('Temp CFF')
+                                                                ? '#e65100'
+                                                                : state.caseStatus.includes('Escalated')
+                                                                    ? '#4caf50'
+                                                                    : state.caseStatus.includes('Re-Assign')
+                                                                        ? '#ef5350'
+                                                                        : state.caseStatus.includes('Archive')
+                                                                            ? '#ba68c8'
+                                                                            : '#c62828',
+                                                color: '#fff',
+                                                display: 'table',
+                                            }}>{state.caseStatus}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -163,9 +180,8 @@ function ViewAppAction() {
 };
 
 const ActionCont = (props) => {
-    if ((props.stage === 'stage1' && (props.casedata.caseStatus === 'S2 Clarification' || props.casedata.caseStatus === 'S3 Clarification')) ||
-        (props.stage === 'stage2' && (props.casedata.caseStatus === 'S1 Submitted' || props.casedata.caseStatus === 'S2 Clarified' || props.casedata.caseStatus === 'S2 Verified'))
-        || (props.stage === 'stage3' && (props.casedata.caseStatus === 'S2 Approved' || props.casedata.caseStatus === 'S3 Clarified' || props.casedata.caseStatus === 'S3 Verified'))) {
+    if ((props.stage === 'stage2' && (props.casedata.caseStatus === 'Open' || props.casedata.caseStatus === 'Re-Assign' || props.casedata.caseStatus === 'Temp CFF'))
+        || (props.stage === 'stage3' && (props.casedata.caseStatus === 'Escalated' || props.casedata.caseStatus === 'CFF' || props.casedata.caseStatus === 'Archive'))) {
         return (
             <div className='view-select-action-container'>
                 <Form>
@@ -199,6 +215,7 @@ const SelectDrop = (props) => {
         caseId: null,
         commentId: null,
         caseStatus: null,
+        caseClassification: null,
         commentMsg: null,
         assignedTo: null,
         assignedBy: null,
@@ -242,6 +259,8 @@ const SelectDrop = (props) => {
             "filter": { "_id": { "$oid": props.casedata._id } },
             "update": {
                 "$set": {
+                    "caseStatusId": data.caseStatus === 'Open' ? 2 : data.caseStatus === 'Escalated' ? 3 : data.caseStatus === 'Re-Assign' ? 4 : data.caseStatus === 'Temp CFF' ? 5 : data.caseStatus === 'CFF' ? 6 : data.caseStatus === 'Archive' ? 7 : 1,
+                    "caseClassification": data.caseClassification,
                     "caseStatus": data.caseStatus,
                     "comment": data.commentMsg,
                     "assignee": data.assignedBy,
@@ -276,22 +295,26 @@ const SelectDrop = (props) => {
     }, [formData]);
 
     const s1ActionOptions = [
-        { value: 'S2 Clarified', label: 'S2 Clarified' },
-        { value: 'S3 Clarified', label: 'S3 Clarified' },
+        { value: 'Open', label: 'Open' },
+        { value: 'Draft', label: 'Draft' },
     ];
 
     const s2ActionOptions = [
-        { value: 'S2 Rejected', label: 'S2 Rejected' },
-        { value: 'S2 Clarification', label: 'S2 Clarification' },
-        { value: 'S2 Verified', label: 'S2 Verified' },
-        { value: 'S2 Approved', label: 'S2 Approved' },
+        { value: 'Open', label: 'Open' },
+        { value: 'Re-Assign', label: 'Re-Assign' },
+        { value: 'Escalated', label: 'Escalate' },
+        { value: 'Temp CFF', label: 'Temp CFF' },
     ];
 
     const s3ActionOptions = [
-        { value: 'S3 Rejected', label: 'S3 Rejected' },
-        { value: 'S3 Clarification', label: 'S3 Clarification' },
-        { value: 'S3 Verified', label: 'S3 Verified' },
-        { value: 'S3 Approved', label: 'S3 Approved' },
+        { value: 'Open', label: 'Open' },
+        { value: 'CFF', label: 'CFF' },
+        { value: 'Archive', label: 'Archive' },
+    ];
+
+    const caseClassificationOptions = [
+        { value: 'Sensitive', label: 'Sensitive' },
+        { value: 'Non-Sensitive', label: 'Non-Sensitive' },
     ];
 
     const handleSubmit = () => {
@@ -300,9 +323,10 @@ const SelectDrop = (props) => {
                 "caseId": props.casedata.caseId,
                 "commentId": props.noofcomments + 1,
                 "caseStatus": values.caseStatus,
+                "caseClassification": values.caseClassification,
                 "commentMsg": values.commentMsg,
                 "attachment": values.attachment,
-                "assignedBy": props.stage,
+                "assignedBy": props.stage === 'stage1' ? 'ASO' : props.stage === 'stage2' ? 'CIO' : 'AO',
                 "assignedTo": "Stage 1",
                 "commentDate": moment(),
             });
@@ -369,6 +393,20 @@ const SelectDrop = (props) => {
                 </Form.Item>
                 <Form.Item
                     key={2} // Add a unique key for each Form.Item component
+                    label="Case Classification"
+                    name={`caseClassification`} // Use a unique name for each Form.Item componenty
+                    rules={[
+                        { required: true, message: 'Please select case the case classification' },
+                    ]}
+                    initialValue={props.casedata.caseClassification}
+                ><Select
+                        defaultValue=""
+                        onChange={handleChange}
+                        options={caseClassificationOptions}
+                    />
+                </Form.Item>
+                <Form.Item
+                    key={3} // Add a unique key for each Form.Item component
                     label="Comment"
                     name={`commentMsg`} // Use a unique name for each Form.Item component
                     rules={[
@@ -381,7 +419,7 @@ const SelectDrop = (props) => {
                     <TextArea rows={4} />
                 </Form.Item>
                 <Form.Item
-                    key={3}
+                    key={4}
                     label="Attachment"
                     name="attachment"
                 >
