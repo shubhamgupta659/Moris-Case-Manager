@@ -505,3 +505,16 @@ footer__links {
   width: 22px;
   height: 22px;
 }
+
+.card-title-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-icon-container svg{
+  width: 18px;
+    height: 18px;
+}

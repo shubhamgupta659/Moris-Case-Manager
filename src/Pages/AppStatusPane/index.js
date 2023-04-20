@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Row, Collapse } from 'antd';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import FileOpenIcon from '@mui/icons-material/FileOpen';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import RuleFolderIcon from '@mui/icons-material/RuleFolder';
+import EscalatorIcon from '@mui/icons-material/Escalator';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
 const { Panel } = Collapse;
 
@@ -90,7 +97,10 @@ function AppStatusPane({ parentData }) {
                                     <div className="number" >
                                         <Row align="middle" gutter={[10, 0]}>
                                             <Col className='card-content-container' xs={3}>
-                                                <div className="icon-box">{c._id.caseStatus}</div>
+                                                <div className='card-title-container'>
+                                                    <div className='card-icon-container'>{c._id.caseStatus === 'Draft' ? <DraftsIcon /> : c._id.caseStatus === 'Open' ? <FileOpenIcon /> : c._id.caseStatus === 'Re-Assign' ? <AssignmentIndIcon /> : c._id.caseStatus === 'Escalated' ? <EscalatorIcon /> : c._id.caseStatus === 'Temp CFF' ? < DeleteIcon /> : c._id.caseStatus === 'CFF' ? < RuleFolderIcon /> : <ArchiveIcon />}</div>
+                                                    <div className="icon-box">{c._id.caseStatus}</div>
+                                                </div>
                                                 <div className='box-line'><hr></hr></div>
                                                 <div>{c.count}</div>
                                             </Col>

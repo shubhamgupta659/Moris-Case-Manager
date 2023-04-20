@@ -3,7 +3,7 @@ import {
 } from "antd";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function TIPSHome() {
   const navigate = useNavigate();
   const onLoginClick = (item) => {
     navigate(`/dashboard`);
@@ -39,4 +39,4 @@ function Home() {
     </div>
   );
 }
-export default Home;
+export default TIPSHome;
