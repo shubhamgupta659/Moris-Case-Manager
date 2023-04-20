@@ -70,7 +70,7 @@ a {
 .applogo {
   color: #ffffff;
   border: none;
-  width: 170px;
+  width: 250px;
 }
 
 .user-profiles {
@@ -91,7 +91,7 @@ a {
 }
 
 .empty-user-profiles {
-  width: 170px;
+  width: 250px;
 }
 
 .pageContent {
@@ -482,16 +482,26 @@ footer__links {
 
 .right-nav {
   display: flex;
-  width: 170px;
-  gap: 20px;
+  width: 250px;
+  gap: 15px;
 }
 
-.settings-icon {
+.settings-icon svg {
   width: 22px;
   height: 22px;
 }
 
-.app-drawer {
+.app-drawer-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.timeline-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.notif-icon svg {
   width: 22px;
   height: 22px;
 }
