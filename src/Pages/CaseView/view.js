@@ -105,6 +105,22 @@ function ViewAppAction() {
                                             <td>{state.caseType}</td>
                                         </tr>
                                         <tr>
+                                            <td className='case-label'>Case Description</td>
+                                            <td>{state.description}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className='case-label'>Case Classification</td>
+                                            <td>{state.caseClassification}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className='case-label'>Operator Name</td>
+                                            <td>{state.operatorName}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className='case-label'>Date of Incidence</td>
+                                            <td>{state.doi}</td>
+                                        </tr>
+                                        <tr>
                                             <td className='case-label'>Role</td>
                                             <td>{state.role}</td>
                                         </tr>
