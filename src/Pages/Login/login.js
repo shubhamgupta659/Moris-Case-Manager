@@ -2,16 +2,44 @@ import React, { useContext, useEffect } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../AuthContext';
+import axios from 'axios';
 
 const Login = () => {
-    const { setUsername, setUserImageSrc } = useContext(AuthContext);
+    const { setUsername, setUserImageSrc, setAccessToken } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    async function fetchToken() {
+        let data = JSON.stringify({
+            "username": "morisuser@unison.com",
+            "password": "morispassword"
+        });
+
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://ap-southeast-1.aws.realm.mongodb.com/api/client/v2.0/app/data-gqwih/auth/providers/local-userpass/login',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        await axios.request(config)
+            .then((response) => {
+                setAccessToken(response.data.access_token);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     useEffect(() => {
         setUsername('');
         setUserImageSrc('');
-    },[]);
+    }, []);
+
     const onFinish = (values) => {
+        fetchToken();
         if (values.username === 'asouser' && values.password === 'password') {
             setUsername(values.username);
             setUserImageSrc('https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/106.jpg')

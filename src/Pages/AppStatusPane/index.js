@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Row, Collapse } from 'antd';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
@@ -9,9 +9,11 @@ import RuleFolderIcon from '@mui/icons-material/RuleFolder';
 import EscalatorIcon from '@mui/icons-material/Escalator';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../AuthContext';
 const { Panel } = Collapse;
 
 function AppStatusPane({ parentData }) {
+    const { accessToken } = useContext(AuthContext);
     const navigate = useNavigate();
     const [postResult, setPostResult] = useState([]);
     async function fetchStatusCount() {
@@ -39,7 +41,7 @@ function AppStatusPane({ parentData }) {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/aggregate',
             headers: {
-                'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+                'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import AppStatusPane from "../AppStatusPane";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { Col, Row } from 'antd';
@@ -6,10 +6,12 @@ import axios from 'axios';
 import { Select, Modal, Form, Input, Upload, Button, Tooltip } from 'antd';
 import { UploadOutlined, RollbackOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import { AuthContext } from '../../AuthContext';
 const { TextArea } = Input;
 
 
 function ViewAppAction() {
+    const { accessToken } = useContext(AuthContext);
     const [size, setSize] = useState('small');
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -29,8 +31,9 @@ function ViewAppAction() {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/find',
             headers: {
-                'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+                'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
@@ -158,7 +161,7 @@ function ViewAppAction() {
                                 <div className="view-back-button-container"><Tooltip title="Back"><Button shape="round" onClick={backButtonHandler} icon={<RollbackOutlined />} size={size} /></Tooltip></div>
                             </div>
                             <div className='view-form-sep'><hr></hr></div>
-                            <ActionCont stage={params.stage} casedata={state} noofcomments={postResult === null ? 0 : postResult.length} />
+                            <ActionCont stage={params.stage} casedata={state} accessToken={accessToken} noofcomments={postResult === null ? 0 : postResult.length} />
 
                             <div className='view-form-comments-container'>
                                 <table className="striped">
@@ -252,8 +255,9 @@ const SelectDrop = (props) => {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/insertOne',
             headers: {
-                'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+                'Authorization': 'Bearer ' + props.accessToken,
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
@@ -289,8 +293,9 @@ const SelectDrop = (props) => {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/updateOne',
             headers: {
-                'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+                'Authorization': 'Bearer ' + props.accessToken,
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };

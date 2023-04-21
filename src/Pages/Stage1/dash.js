@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 //MRT Imports
 import MaterialReactTable from 'material-react-table';
@@ -13,9 +13,11 @@ import {
 import { Edit, RemoveRedEye } from '@mui/icons-material';
 import axios from 'axios';
 import AppStatusPane from '../AppStatusPane';
-import AppHeader from '../../Components/Header';
+import { AuthContext } from '../../AuthContext';
+
 
 function Stage1Dash() {
+  const { accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [postResult, setPostResult] = useState(null);
   async function fetchDashData() {
@@ -30,7 +32,7 @@ function Stage1Dash() {
       maxBodyLength: Infinity,
       url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/find',
       headers: {
-        'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+        'Authorization': 'Bearer ' + accessToken,
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       },
@@ -183,7 +185,7 @@ function Stage1Dash() {
   };
 
   return (
-    
+
     <div>
       <div><AppStatusPane parentData={postResult} /></div>
       <div className='mui-table'>

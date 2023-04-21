@@ -1,13 +1,15 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Form, Checkbox, Input, Select, DatePicker, Button, Tooltip, Collapse } from 'antd';
 import axios from 'axios';
 import moment from "moment";
 import { RollbackOutlined } from '@ant-design/icons';
+import { AuthContext } from "../../AuthContext";
 const { Panel } = Collapse;
 const { TextArea } = Input;
 
 const Stage1App = () => {
+    const { accessToken } = useContext(AuthContext);
     const navigate = useNavigate();
     const { state } = useLocation();
     const params = useParams();
@@ -150,8 +152,9 @@ const Stage1App = () => {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/insertOne',
             headers: {
-                'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+                'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
