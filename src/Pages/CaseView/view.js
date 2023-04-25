@@ -12,7 +12,7 @@ const { TextArea } = Input;
 
 function ViewAppAction() {
     const { accessToken } = useContext(AuthContext);
-    const [size, setSize] = useState('small');
+    const [size] = useState('small');
     const navigate = useNavigate();
     const { state } = useLocation();
     const params = useParams();
@@ -33,7 +33,6 @@ function ViewAppAction() {
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
@@ -257,7 +256,6 @@ const SelectDrop = (props) => {
             headers: {
                 'Authorization': 'Bearer ' + props.accessToken,
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
@@ -295,7 +293,6 @@ const SelectDrop = (props) => {
             headers: {
                 'Authorization': 'Bearer ' + props.accessToken,
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };

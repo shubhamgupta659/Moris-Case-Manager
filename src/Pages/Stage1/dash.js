@@ -33,8 +33,7 @@ function Stage1Dash() {
       url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/find',
       headers: {
         'Authorization': 'Bearer ' + accessToken,
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
       },
       data: msg
     };
@@ -50,7 +49,7 @@ function Stage1Dash() {
 
   useEffect(() => {
     fetchDashData();
-  }, []);
+  }, postResult);
 
   const columns = useMemo(
     () => [

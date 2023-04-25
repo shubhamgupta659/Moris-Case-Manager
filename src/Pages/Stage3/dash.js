@@ -33,7 +33,6 @@ const Stage3Dash = () => {
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };
@@ -49,7 +48,7 @@ const Stage3Dash = () => {
 
     useEffect(() => {
         fetchDashData();
-    }, []);
+    }, postResult);
 
     const columns = useMemo(
         () => [

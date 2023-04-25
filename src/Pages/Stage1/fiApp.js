@@ -14,7 +14,7 @@ const Stage1App = () => {
     const { state } = useLocation();
     const params = useParams();
     const formRef = useRef();
-    const [size, setSize] = useState('small');
+    const [size] = useState('small');
     const [formData, setFormData] = useState({
         caseId: state ? state.caseId : params.id,
         name: state ? state.name : null,
@@ -154,7 +154,6 @@ const Stage1App = () => {
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };

@@ -43,7 +43,6 @@ function AppStatusPane({ parentData }) {
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
             },
             data: msg
         };

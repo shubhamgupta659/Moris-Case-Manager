@@ -19,7 +19,7 @@ const Login = () => {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.realm.mongodb.com/api/client/v2.0/app/data-gqwih/auth/providers/local-userpass/login',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             data: data
         };
