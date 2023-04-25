@@ -183,7 +183,7 @@ const Stage1App = () => {
             maxBodyLength: Infinity,
             url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-gqwih/endpoint/data/v1/action/updateOne',
             headers: {
-                'api-key': 'ox92OF8v8L0rEaIvT10XLtBR3miiJVEvS0gvvivhcXKtbyPggS4GZ6crLQlYL30n',
+                'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json',
             },
             data: msg
