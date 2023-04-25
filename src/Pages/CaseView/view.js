@@ -87,8 +87,8 @@ function ViewAppAction() {
                                             <td>{state.uenNumber}</td>
                                         </tr>
                                         <tr>
-                                            <td className='case-label'>Country of Origin</td>
-                                            <td>{state.countryOfOrigin}</td>
+                                            <td className='case-label'>Location</td>
+                                            <td>{state.location}</td>
                                         </tr>
                                         <tr>
                                             <td className='case-label'>Address</td>
