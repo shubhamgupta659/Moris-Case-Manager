@@ -48,7 +48,7 @@ const Stage2Dash = () => {
 
     useEffect(() => {
         fetchDashData();
-    }, postResult);
+    }, []);
 
     const columns = useMemo(
         () => [
@@ -186,7 +186,7 @@ const Stage2Dash = () => {
 
     return (
         <div>
-            <div><AppStatusPane parentData={postResult} /></div>
+            <div><AppStatusPane parentData={postResult} stage='stage2'/></div>
             <div className='mui-table'>
                 <MaterialReactTable
                     displayColumnDefOptions={{
