@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../AuthContext';
 const { Panel } = Collapse;
 
-function AppStatusPane({ parentData }) {
+function AppStatusPane({ parentData,stage }) {
     const { accessToken } = useContext(AuthContext);
     const navigate = useNavigate();
     const [postResult, setPostResult] = useState([]);
@@ -62,7 +62,7 @@ function AppStatusPane({ parentData }) {
     }, parentData);
 
     const onCardClick = (item) => {
-        navigate(`/oic/${item._id.caseStatus}`);
+        navigate(`/${stage}`);
     };
 
     return (
